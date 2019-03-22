@@ -1,2 +1,3 @@
 # pybytom
-Python3 implementation of the Bytom protocol
+
+Python3 implementation of the Bytom protocol.
