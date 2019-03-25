@@ -4,7 +4,7 @@ pybtm
 - [1 Installation](#1-installation)
 - [2 Usage](#2-usage)
   - [2.1 Create entropy](#21-create-entropy)
-  - [Create mnemonics](#create-mnemonics)
+  - [2.2 Create mnemonics](#22-create-mnemonics)
 
 Python3 implementation of the Bytom protocol.
 
@@ -26,7 +26,7 @@ get_entropy() create 128bits entropy.
 '100e2704b431f914e3262926bdba6fce'
 ```
 
-### Create mnemonics
+### 2.2 Create mnemonics
 
 get_mnemonic create 12 new mnemonics, if no paramater is specified, it will return 12 new random mnemonics.
 
