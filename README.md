@@ -65,7 +65,7 @@ get_root_xprv create root expanded private key.
 
 get_xpub create expanded public key.
 
-```
+```python
 >>> from pybtm import key
 >>> key.get_xpub('c003f4bcccf9ad6f05ad2c84fa5ff98430eb8e73de5de232bc29334c7d074759d513bc370335cac51d77f0be5dfe84de024cfee562530b4d873b5f5e2ff4f57c')
 '1b0541a7664cee929edb54d9ef21996b90546918a920a77e1cd6015d97c56563d513bc370335cac51d77f0be5dfe84de024cfee562530b4d873b5f5e2ff4f57c'
