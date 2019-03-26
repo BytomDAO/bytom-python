@@ -33,6 +33,4 @@ def verify(public_key_str, signature_str, message_str):
         result = True
     except ed25519.BadSignatureError:
         result = False
-    return {
-        "result": result
-    }
+    return result

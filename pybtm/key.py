@@ -206,7 +206,7 @@ def prune_intermediate_scalar(f):
 def get_child_xprv(xprv_hexstr, path_list):
     for i in range(len(path_list)):
         selector_bytes = bytes.fromhex(path_list[i])
-        xpub_hexstr = xprv_to_xpub(xprv_hexstr)['xpub']
+        xpub_hexstr = get_xpub(xprv_hexstr)
         xpub_bytes = bytes.fromhex(xpub_hexstr)
         xprv_bytes = bytes.fromhex(xprv_hexstr)
         hc_bytes = hmac.HMAC(xpub_bytes[32:], b'N'+xpub_bytes[:32]+selector_bytes, digestmod=hashlib.sha512).digest()
@@ -305,7 +305,7 @@ def get_child_xpub(xpub_hexstr, path_list):
 #   message_hexstr: 1246b84985e1ab5f83f4ec2bdf271114666fd3d9e24d12981a3c861b9ed523c6
 #   signature_hexstr: ab18f49b23d03295bc2a3f2a7d5bb53a2997bed733e1fc408b50ec834ae7e43f7da40fe5d9d50f6ef2d188e1d27f976aa2586cef1ba00dd098b5c9effa046306
 def xprv_sign(xprv_hexstr, message_hexstr):
-    xprv_hexstr = xprv_to_expanded_private_key(xprv_hexstr)['expanded_private_key']
+    xprv_hexstr = get_expanded_private_key(xprv_hexstr)
     xprv_bytes = bytes.fromhex(xprv_hexstr)
     message_bytes = bytes.fromhex(message_hexstr)
     data_bytes = xprv_bytes[32:64] + message_bytes
@@ -317,7 +317,7 @@ def xprv_sign(xprv_hexstr, message_hexstr):
 
     scalar = decodeint(message_digest_reduced)
     encoded_r = encodepoint(scalarmultbase(scalar))
-    xpub_hexstr = xprv_to_xpub(xprv_hexstr)['xpub']
+    xpub_hexstr = get_xpub(xprv_hexstr)
     xpub_bytes = bytes.fromhex(xpub_hexstr)
     hram_digest_data = encoded_r + xpub_bytes[:32] + message_bytes
 
@@ -357,16 +357,16 @@ def xprv_sign(xprv_hexstr, message_hexstr):
 #   signature_hexstr: ab18f49b23d03295bc2a3f2a7d5bb53a2997bed733e1fc408b50ec834ae7e43f7da40fe5d9d50f6ef2d188e1d27f976aa2586cef1ba00dd098b5c9effa046306
 def xpub_verify(xpub_hexstr, message_hexstr, signature_hexstr):
     result = False
-    result = verify(xpub_to_public_key(xpub_hexstr)['public_key'], signature_hexstr, message_hexstr)['result']
+    result = verify(get_public_key(xpub_hexstr), signature_hexstr, message_hexstr)
     return result
 
 
-def get_new_key(entropy_hexstr=None, mnemonic_hexstr=None):
+def get_new_key(entropy_hexstr=None, mnemonic_str=None):
     if (entropy_hexstr is None) and (mnemonic_str is None):
         entropy_hexstr = get_entropy()
         mnemonic_str = get_mnemonic(entropy_hexstr)
     if (entropy_hexstr is None) and (mnemonic_str is not None):
-        pass
+        entropy_hexstr = ''
     if entropy_hexstr is not None:
         mnemonic_str = get_mnemonic(entropy_hexstr)
     seed_hexstr = get_seed(mnemonic_str)
