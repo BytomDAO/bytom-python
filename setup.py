@@ -12,7 +12,10 @@ setuptools.setup(
     long_description=long_description,
     long_description_content_type="text/markdown",
     url="https://github.com/Bytom/pybtm",
-    packages=setuptools.find_packages(),
+    packages=[
+        "ed25519",
+        "pybase64"
+    ],
     classifiers=[
         "Programming Language :: Python :: 3",
         "License :: OSI Approved :: MIT License",
