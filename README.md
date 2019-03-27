@@ -12,9 +12,9 @@ pybtm
   - [2.7 Create public key](#27-create-public-key)
   - [2.8 Create child expanded private key](#28-create-child-expanded-private-key)
   - [2.9 Create child expanded public key](#29-create-child-expanded-public-key)
-  - [Sign message](#sign-message)
-  - [Verify signature](#verify-signature)
-  - [Create new key](#create-new-key)
+  - [2.10 Sign message](#210-sign-message)
+  - [2.11 Verify signature](#211-verify-signature)
+  - [2.12 Create new key](#212-create-new-key)
 
 Python3 implementation of the Bytom protocol.
 
@@ -30,6 +30,10 @@ $ pip install pybtm
 
 get_entropy() create 128 bits entropy.
 
+Return:
+
+- entropy_hexstr: 128 bits entropy.
+
 ```python
 >>> from pybtm import key
 >>> key.get_entropy()
@@ -39,6 +43,14 @@ get_entropy() create 128 bits entropy.
 ### 2.2 Create mnemonics
 
 get_mnemonic create 12 new mnemonics.
+
+Parameter:
+
+- entropy_hexstr(optional): 128 bits entropy, type is hex string.
+
+Return:
+
+- mnemonic_str: 12 mnemonics.
 
 ```python
 >>> key.get_mnemonic('089fe9bf0cac76760bc4b131d938669e')
@@ -57,6 +69,14 @@ If no paramater is specified, it will return 12 new random mnemonics.
 
 get_seed create 512 bits seed from 12 mnemonics.
 
+Parameter:
+
+- mnemonic_str: 12 mnemonics.
+
+Return:
+
+- seed_hexstr: 512 bits seed, type is hex string.
+
 ```python
 >>> from pybtm import key
 >>> key.get_seed('ancient young hurt bone shuffle deposit congress normal crack six boost despair')
@@ -66,6 +86,14 @@ get_seed create 512 bits seed from 12 mnemonics.
 ### 2.4 Create root expanded private key
 
 get_root_xprv create root expanded private key.
+
+Parameter:
+
+- seed_hexstr: 512 bits seed, type is hex string.
+
+Return:
+
+- root_xprv_hexstring: 512 bits seed, type is hex string.
 
 ```python
 >>> from pybtm import key
@@ -172,7 +200,7 @@ Return:
 'e65c1a9714e2116c6e5d57dee188a53b98dc901a21def5a5ca46fcf78303f4f2bd9de7f2dcad9d7d45389bc94baecaec88aabf58f6e1d832b1f9995a93ec37ea'
 ```
 
-### Sign message
+### 2.10 Sign message
 
 xprv_sign sign message.
 
@@ -193,7 +221,7 @@ Return:
 'ab18f49b23d03295bc2a3f2a7d5bb53a2997bed733e1fc408b50ec834ae7e43f7da40fe5d9d50f6ef2d188e1d27f976aa2586cef1ba00dd098b5c9effa046306'
 ```
 
-### Verify signature
+### 2.11 Verify signature
 
 xpub_verify verify signature.
 
@@ -216,7 +244,7 @@ Return:
 True
 ```
 
-### Create new key
+### 2.12 Create new key
 
 get_new_key create new key.
 
@@ -251,4 +279,22 @@ Return:
 {'base64': '/9j/4AAQSkZJRgABAQAAAQABAAD...'}
 ```
 
+```python
+>>> from pybtm import key
+>>> r = key.get_new_key(entropy_hexstr='4d33735a9e92f634d22aecbb4044038d')
+>>> r['entropy']
+'4d33735a9e92f634d22aecbb4044038d'
+>>> r['mnemonic']
+'essay oppose stove diamond control bounce emerge frown robust acquire abstract brick'
+```
 
+```python
+>>> from pybtm import key
+>>> r = key.get_new_key(mnemonic_str='ancient young hurt bone shuffle deposit congress normal crack six boost despair')
+>>> r['entropy']
+''
+>>> r['mnemonic']
+'ancient young hurt bone shuffle deposit congress normal crack six boost despair'
+>>> r['seed']
+'afa3a86bbec2f40bb32833fc6324593824c4fc7821ed32eac1f762b5893e56745f66a6c6f2588b3d627680aa4e0e50efd25065097b3daa8c6a19d606838fe7d4'
+```
