@@ -31,14 +31,19 @@ get_entropy() create 128 bits entropy.
 
 ### 2.2 Create mnemonics
 
-get_mnemonic create 12 new mnemonics, if no paramater is specified, it will return 12 new random mnemonics.
+get_mnemonic create 12 new mnemonics.
+
+```python
+>>> key.get_mnemonic('089fe9bf0cac76760bc4b131d938669e')
+'ancient young hurt bone shuffle deposit congress normal crack six boost despair'
+```
+
+If no paramater is specified, it will return 12 new random mnemonics.
 
 ```python
 >>> from pybtm import key
 >>> key.get_mnemonic()
 'nothing gate perfect glide wink lizard journey negative load quote wrong reason'
->>> key.get_mnemonic('089fe9bf0cac76760bc4b131d938669e')
-'ancient young hurt bone shuffle deposit congress normal crack six boost despair'
 ```
 
 ### 2.3 Create seed

@@ -5,16 +5,21 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="pybtm",
-    version="0.0.14",
+    version="0.0.15",
     author="zcc0721",
     author_email="zcc0721@foxmail.com",
     description="Python3 implementation of the Bytom protocol.",
     long_description=long_description,
     long_description_content_type="text/markdown",
     url="https://github.com/Bytom/pybtm",
-    packages=[
-        "ed25519",
-        "pybase64"
+    packages=setuptools.find_packages(),
+    install_requires=[
+        "ed25519>=1.4",
+        "pbkdf2>=1.3",
+        "pybase64>=0.5.0",
+        "qrcode>=6.1",
+        "sha3>=0.2.1",
+        "six>=1.12.0"
     ],
     classifiers=[
         "Programming Language :: Python :: 3",
