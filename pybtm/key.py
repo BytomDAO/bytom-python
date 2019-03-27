@@ -365,9 +365,9 @@ def get_new_key(entropy_hexstr=None, mnemonic_str=None):
     if (entropy_hexstr is None) and (mnemonic_str is None):
         entropy_hexstr = get_entropy()
         mnemonic_str = get_mnemonic(entropy_hexstr)
-    if (entropy_hexstr is None) and (mnemonic_str is not None):
+    elif (entropy_hexstr is None) and (mnemonic_str is not None):
         entropy_hexstr = ''
-    if entropy_hexstr is not None:
+    elif entropy_hexstr is not None:
         mnemonic_str = get_mnemonic(entropy_hexstr)
     seed_hexstr = get_seed(mnemonic_str)
     root_xprv_hexstr = get_root_xprv(seed_hexstr)
