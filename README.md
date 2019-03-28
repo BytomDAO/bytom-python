@@ -397,6 +397,7 @@ Return:
 - address_base64: bytom address image base64.
 
 ```python
+>>> from pybtm import receiver
 >>> xpub_hexstr = '8fde12d7c9d6b6cbfbf344edd42f2ed86ae6270b36bab714af5fd5bb3b54adcec4265f1de85ece50f17534e42016ee9404a11fec94ddfadd4a064d27ef3f3f4c'
 >>> account_index_int = 1
 >>> address_index_int = 1
