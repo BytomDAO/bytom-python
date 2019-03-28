@@ -304,6 +304,17 @@ Return:
 
 get_path_from_index create HD path.
 
+Parameter:
+
+- account_index_int: 1, 2, 3, ..., type is hex string.
+- address_index_int: 1, 2, 3, ..., type is hex string.
+- change_bool: If receiver is change, change_bool is True, otherwise the change_bool is False.
+
+Return:
+
+- path_list: path list.
+- path_str: path string.
+
 ```python
 >>> from pybtm import receiver
 >>> account_index_int = 1
@@ -312,4 +323,3 @@ get_path_from_index create HD path.
 >>> receiver.get_path_from_index(account_index_int, address_index_int, change_bool)
 {'path': ['2c000000', '99000000', '01000000', '01000000', '01000000'], 'path_str': 'm/44/153/1/1/1'}
 ```
-
