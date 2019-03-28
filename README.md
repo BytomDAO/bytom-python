@@ -15,6 +15,7 @@ pybtm
   - [2.10 Sign message](#210-sign-message)
   - [2.11 Verify signature](#211-verify-signature)
   - [2.12 Create new key](#212-create-new-key)
+  - [2.13 Create HD path](#213-create-hd-path)
 
 Python3 implementation of the Bytom protocol.
 
@@ -298,3 +299,17 @@ Return:
 >>> r['seed']
 'afa3a86bbec2f40bb32833fc6324593824c4fc7821ed32eac1f762b5893e56745f66a6c6f2588b3d627680aa4e0e50efd25065097b3daa8c6a19d606838fe7d4'
 ```
+
+### 2.13 Create HD path
+
+get_path_from_index create HD path.
+
+```python
+>>> from pybtm import receiver
+>>> account_index_int = 1
+>>> address_index_int = 1
+>>> change_bool = True
+>>> receiver.get_path_from_index(account_index_int, address_index_int, change_bool)
+{'path': ['2c000000', '99000000', '01000000', '01000000', '01000000'], 'path_str': 'm/44/153/1/1/1'}
+```
+

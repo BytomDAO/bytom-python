@@ -17,9 +17,7 @@ def create_qrcode_base64(s):
     buffered = BytesIO()
     img.save(buffered, format="JPEG")
     base64_str = pybase64.b64encode(buffered.getvalue()).decode("utf-8")
-    return {
-        "base64": base64_str
-    }
+    return base64_str
 
 
 if six.PY3:
