@@ -17,7 +17,8 @@ pybtm
   - [2.12 Create new key](#212-create-new-key)
   - [2.13 Create HD path](#213-create-hd-path)
   - [2.14 Create control program](#214-create-control-program)
-  - [Create address](#create-address)
+  - [2.15 Create address](#215-create-address)
+  - [2.16 Create new address](#216-create-new-address)
 
 Python3 implementation of the Bytom protocol.
 
@@ -355,7 +356,7 @@ Return:
 '0014052620b86a6d5e07311d5019dffa3864ccc8a6bd'
 ```
 
-### Create address
+### 2.15 Create address
 
 get_address create address from control program.
 
@@ -369,5 +370,38 @@ Return:
 - address: bytom address.
 
 ```python
+>>> from pybtm import receiver
+>>> control_program_hexstr = '001431f2b90b469e89361225aae370f73e5473b9852b'
+>>> network_str = 'mainnet'
+>>> receiver.get_address(control_program_hexstr, network_str)
+'bm1qx8etjz6xn6ynvy394t3hpae723emnpft3nrwej'
+```
 
+### 2.16 Create new address
+
+get_new_address create new address.
+
+Parameter:
+
+- xpub_hexstr: 512 bits expanded public key, type is hex string.
+- account_index_int: account index, e.g. 1, 2, 3...
+- address_index_int: address index, e.g. 1, 2, 3...
+- change_bool: If receiver is change, change_bool is True, otherwise the change_bool is False.
+- network_str: 3 types of network is available: mainnet, testnet and solonet.
+
+Return:
+
+- path: BIP44 HD path.
+- control program: control program.
+- address: bytom address.
+- address_base64: bytom address image base64.
+
+```python
+>>> xpub_hexstr = '8fde12d7c9d6b6cbfbf344edd42f2ed86ae6270b36bab714af5fd5bb3b54adcec4265f1de85ece50f17534e42016ee9404a11fec94ddfadd4a064d27ef3f3f4c'
+>>> account_index_int = 1
+>>> address_index_int = 1
+>>> change_bool = False
+>>> network_str = 'solonet'
+>>> receiver.get_new_address(xpub_hexstr, account_index_int, address_index_int, change_bool, network_str)
+{'path': 'm/44/153/1/0/1', 'control_program': '00147640f3c34fe4b2b298e54e54a4692a47ce47aa5e', 'address': 'sm1qweq08s60ujet9x89fe22g6f2gl8y02j7lgr5v5', 'address_base64': '/9j/4AAQSkZJRgAB...'}
 ```
