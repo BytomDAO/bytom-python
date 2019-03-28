@@ -125,7 +125,7 @@ def get_address(control_program_hexstr, network_str):
         hrp = 'tm'
     else:
         hrp = 'sm'
-    address_str = segwit_addr.encode(hrp, 0, bytes.fromhex(public_key_hash_hexstr))
+    address_str = encode(hrp, 0, bytes.fromhex(public_key_hash_hexstr))
     return address_str
 
 

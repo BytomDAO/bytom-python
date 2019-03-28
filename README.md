@@ -16,6 +16,8 @@ pybtm
   - [2.11 Verify signature](#211-verify-signature)
   - [2.12 Create new key](#212-create-new-key)
   - [2.13 Create HD path](#213-create-hd-path)
+  - [2.14 Create control program](#214-create-control-program)
+  - [Create address](#create-address)
 
 Python3 implementation of the Bytom protocol.
 
@@ -24,6 +26,10 @@ Python3 implementation of the Bytom protocol.
 ```
 $ pip install pybtm
 ```
+
+Requires:
+
+- Python>=3.7
 
 ## 2 Usage
 
@@ -322,4 +328,46 @@ Return:
 >>> change_bool = True
 >>> receiver.get_path_from_index(account_index_int, address_index_int, change_bool)
 {'path': ['2c000000', '99000000', '01000000', '01000000', '01000000'], 'path_str': 'm/44/153/1/1/1'}
+```
+
+### 2.14 Create control program
+
+get_control_program create control program.
+
+Parameter:
+
+- account_index_int: account index, e.g. 1, 2, 3...
+- address_index_int: address index, e.g. 1, 2, 3...
+- change_bool: If receiver is change, change_bool is True, otherwise the change_bool is False.
+- xpub_hexstr: 512 bits expanded public key, type is hex string.
+
+Return:
+
+- control_program_hexstr: type is hex string.
+
+```python
+>>> from pybtm import receiver
+>>> account_index_int = 1
+>>> address_index_int = 1
+>>> change_bool = False
+>>> xpub_hexstr = '3c6664244d2d57168d173c4691dbf8741a67d972b2d3e1b0067eb825e2005d20c5eebd1c26ccad4de5142d7c339bf62cc1fb79a8b3e42a708cd521368dbc9286'
+>>> receiver.get_control_program(account_index_int, address_index_int, change_bool, xpub_hexstr)
+'0014052620b86a6d5e07311d5019dffa3864ccc8a6bd'
+```
+
+### Create address
+
+get_address create address from control program.
+
+Parameter:
+
+- control_program_hexstr: control program.
+- network_str: 3 types of network is available: mainnet, testnet and solonet.
+
+Return:
+
+- address: bytom address.
+
+```python
+
 ```
