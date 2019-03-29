@@ -19,6 +19,8 @@ pybtm
   - [2.14 Create control program](#214-create-control-program)
   - [2.15 Create address](#215-create-address)
   - [2.16 Create new address](#216-create-new-address)
+  - [2.17 Submit raw transaction](#217-submit-raw-transaction)
+  - [2.18 Decode raw transaction](#218-decode-raw-transaction)
 
 Python3 implementation of the Bytom protocol.
 
@@ -405,4 +407,42 @@ Return:
 >>> network_str = 'solonet'
 >>> receiver.get_new_address(xpub_hexstr, account_index_int, address_index_int, change_bool, network_str)
 {'path': 'm/44/153/1/0/1', 'control_program': '00147640f3c34fe4b2b298e54e54a4692a47ce47aa5e', 'address': 'sm1qweq08s60ujet9x89fe22g6f2gl8y02j7lgr5v5', 'address_base64': '/9j/4AAQSkZJRgAB...'}
+```
+
+### 2.17 Submit raw transaction
+
+submit_transaction submit transaction.
+
+Parameter:
+
+- raw_transaction_str: raw transaction.
+- network_str: 3 types of network is available: mainnet, testnet and solonet.
+
+Return:
+
+- result: If submit transaction successfully, result is 1.
+
+```python
+>>> from pybtm import transaction
+>>> transaction.submit_transaction('070100010161015f28b7b53d8dc90006bf97e0a4eaae2a72ec3d869873188698b694beaf20789f21ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff8099c4d5990100011600149335b1cbd4a77b78e33315a0ed10a95b12e7ca48630240897e2d9d24a3b5faaed0579dee7597b401491595675f897504f8945b29d836235bd2fca72a3ad0cae814628973ebcd142d9d6cc92d0b2571b69e5370a98a340c208cb7fb3086f58db9a31401b99e8c658be66134fb9034de1d5c462679270b090702013effffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff80f9f8bc98010116001406ce4b689ba026ffd3a7ca65d1d059546d4b78a000013dffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff80c6868f01011600147929ef91997c827bebf60fa608f876ea27523c4700', 'testnet')
+'1'
+```
+
+### 2.18 Decode raw transaction
+
+decode_raw_tx decode raw transaction.
+
+Parameter:
+
+- raw_tx_str: raw transaction, type is hex string.
+- network_str: 3 types of network is available: mainnet, testnet and solonet.
+
+Return:
+
+- tx: tx dict.
+
+```python
+>>> from pybtm import transaction
+>>> transaction.decode_raw_tx('070100010161015f28b7b53d8dc90006bf97e0a4eaae2a72ec3d869873188698b694beaf20789f21ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff8099c4d5990100011600149335b1cbd4a77b78e33315a0ed10a95b12e7ca48630240897e2d9d24a3b5faaed0579dee7597b401491595675f897504f8945b29d836235bd2fca72a3ad0cae814628973ebcd142d9d6cc92d0b2571b69e5370a98a340c208cb7fb3086f58db9a31401b99e8c658be66134fb9034de1d5c462679270b090702013effffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff80f9f8bc98010116001406ce4b689ba026ffd3a7ca65d1d059546d4b78a000013dffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff80c6868f01011600147929ef91997c827bebf60fa608f876ea27523c4700', 'solonet')
+{'fee': 20000000, 'inputs': [{'address': 'sm1qjv6mrj755aah3cenzksw6y9ftvfw0jjgk0l2mw', 'amount': 41250000000, 'asset_definition': {}, 'asset_id': 'ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff', 'control_program': '00149335b1cbd4a77b78e33315a0ed10a95b12e7ca48', 'input_id': '6e3f378ed844b143a335e306f4ba26746157589c87e8fc8cba6463c566c56768', 'spent_output_id': 'f229ec6f403d586dc87aa2546bbe64c5f7b5f46eb13c6ee4823d03bc88a7cf17', 'type': 'spend', 'witness_arguments': ['897e2d9d24a3b5faaed0579dee7597b401491595675f897504f8945b29d836235bd2fca72a3ad0cae814628973ebcd142d9d6cc92d0b2571b69e5370a98a340c', '8cb7fb3086f58db9a31401b99e8c658be66134fb9034de1d5c462679270b0907']}], 'outputs': [{'address': 'sm1qqm8yk6ym5qn0l5a8efjar5ze23k5k79qnvtslj', 'amount': 40930000000, 'asset_definition': {}, 'asset_id': 'ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff', 'control_program': '001406ce4b689ba026ffd3a7ca65d1d059546d4b78a0', 'id': '74c73266730d3c6ea32e8667ef9b867068736b84be240fe9fef205fa68bb7b95', 'position': 0, 'type': 'control'}, {'address': 'sm1q0y57lyve0jp8h6lkp7nq37rkagn4y0z8hvh6kq', 'amount': 300000000, 'asset_definition': {}, 'asset_id': 'ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff', 'control_program': '00147929ef91997c827bebf60fa608f876ea27523c47', 'id': 'f115a833d0c302a5006032858a7ed3987f0feb2daf2a9f849384950e4766af51', 'position': 1, 'type': 'control'}], 'size': 333, 'time_range': 0, 'tx_id': '814a73dd57bae67c604f9cbc696cbc42035577423408cb9267136ed971e2bf63', 'version': 1}
 ```

@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="pybtm",
-    version="0.0.20",
+    version="0.1.0",
     author="zcc0721",
     author_email="zcc0721@foxmail.com",
     description="Python3 implementation of the Bytom protocol.",
