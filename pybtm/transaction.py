@@ -5,24 +5,22 @@ from .receiver import *
 
 # submit_transaction broadcast raw transaction
 # raw_transaction_str is signed transaction,
-# network_str is mainnet or testnet
 # test data 1:
-#   raw_transaction_str: 070100010160015e0873eddd68c4ba07c9410984799928288ae771bdccc6d974e72c95727813461fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff8094ebdc030101160014052620b86a6d5e07311d5019dffa3864ccc8a6bd630240312a052f36efb9826aa1021ec91bc6f125dd07f9c4bff87014612069527e15246518806b654d57fff8b6fe91866a19d5a2fb63a5894335fce92a7b4a7fcd340720e87ca3acdebdcad9a1d0f2caecf8ce0dbfc73d060807a210c6f225488347961402013dffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff8082eee0020116001418028ef4f8b8c278907864a1977a5ee6707b2a6b00013cffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff80b8b872011600142935e4869d0317d9701c80a02ecf888143cb9dd200
-#   network_str: testnet
-def submit_transaction(raw_transaction_str, network_str):
+#   raw_transaction_hexstr: 070100010160015e5dfc352f9247985e92b2688a9a0a0e3e45a52f633c7d2c35cf6485fc1f03a89cffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff8094ebdc030101160014052620b86a6d5e07311d5019dffa3864ccc8a6bd630240988348a301c86563eb16105cc0c7e12e8cd1fbc7e9031933dac05a32d2a696bc77b83f25a99a4a9458d976c5327b8004918545a3fde567f28d805f741db54e0b20e87ca3acdebdcad9a1d0f2caecf8ce0dbfc73d060807a210c6f225488347961402013dffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff80b6f7f302011600147950bb5fcfb1c3fe14198c14ebd4ad85bb69bbc500013cffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff8084af5f011600141d8e1c2d71843f41e2131d7fd6df8b47e2cf56b900
+#   submit_url: https://blockmeta.com/api/wisdom/broadcast-transaction
+# test data 2:
+#   raw_transaction_hexstr: 07010001015f015d2f4a8f10afbc0448779fadd916a3f1b8518ffe0b7d20fdf470d8e9b4993ef2b4ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffc0d8883200011600144a594e3e4cbbd87629476e7ee24c1637df66c0b76302406fd39079681118840fd6fd66cdff769f2d05d8520312e9dd559dc23c36a3cb3921e47cba233d5d2267eb0f128a908d1bab877e172e880d3f36dc6a5e5826540c202854e5c181f5a862edd190e413d75937549758ef4902e1475aac52623f0a239302013cffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffc09dd81001160014f63f68597df5c88a92e04229e0fd08a3584ade3b00013cffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff80e1eb1701160014664f28ec6ab8826a028658dc0d0d1f94c6e20fa300
+#   submit_url: https://blockmeta.com/api/v2/broadcast-transaction
+def submit_transaction(raw_transaction_hexstr, submit_url):
     raw_transaction_dict = {
-        "transaction": raw_transaction_str
+        "transaction": raw_transaction_hexstr
     }
     raw_transaction_json = json.dumps(raw_transaction_dict)
     headers = {
         "content-type": "application/json",
         "accept": "application/json"
     }
-    if network_str == "mainnet":
-        url = "https://blockmeta.com/api/v2/broadcast-transaction"
-    else:
-        url = "https://blockmeta.com/api/wisdom/broadcast-transaction"
-    response = requests.post(url, headers=headers, data=raw_transaction_json)
+    response = requests.post(submit_url, headers=headers, data=raw_transaction_json)
     return response.text[:-1]
 
 
