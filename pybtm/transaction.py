@@ -276,7 +276,7 @@ def decode_raw_tx(raw_transaction_str, network_str):
             offset = offset + 2 * length
             tx_input['control_program'] = raw_transaction_str[offset:offset+2*control_program_length]
             offset = offset + 2 * control_program_length
-            tx_input['address'] = receiver.create_address(tx_input['control_program'], network_str)['address']
+            tx_input['address'] = get_address(tx_input['control_program'], network_str)['address']
             _, length = get_uvarint(raw_transaction_str[offset:offset+18])
             offset = offset + 2 * length
             witness_arguments_amount, length = get_uvarint(raw_transaction_str[offset:offset+18])
@@ -352,7 +352,7 @@ def decode_raw_tx(raw_transaction_str, network_str):
         offset = offset + 2 * length
         tx_output['control_program'] = raw_transaction_str[offset:offset+2*control_program_length]
         offset = offset + 2 * control_program_length
-        tx_output['address'] = receiver.create_address(tx_output['control_program'], network_str)['address']
+        tx_output['address'] = get_address(tx_output['control_program'], network_str)['address']
         _, length = get_uvarint(raw_transaction_str[offset:offset+18])
         offset = offset + 2 * length
         prepare_output_id_hexstr = mux_id_hexstr + tx_output['asset_id'] + (tx_output['amount']).to_bytes(8, byteorder='little').hex() + (i).to_bytes(8, byteorder='little').hex() + '0100000000000000' + (control_program_length).to_bytes((control_program_length.bit_length() + 7) // 8, 'little').hex() + tx_output['control_program']
