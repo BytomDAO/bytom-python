@@ -444,7 +444,7 @@ decode_raw_tx decode raw transaction.
 
 Parameter:
 
-- raw_tx_str: raw transaction, type is hex string.
+- raw_transaction_str: raw transaction, type is hex string.
 - network_str: 3 types of network is available: mainnet, testnet and solonet.
 
 Return:
